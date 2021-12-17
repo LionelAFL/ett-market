@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export WEB3_RPC_URL=https://mainnet.infura.io/v3/416f8c02c5ef4c80b88c6a8503bf0380
+
+web3 account create

@@ -1,0 +1,128 @@
+<div class="appContainer">
+    <div class="nft-main">
+        <div class="nft-banner">
+            <div class="container-fluid">
+                <ul class="banner_lists">
+                    <li>
+                        <h2>Discover, Collect, and sell<br>
+                            extraordinary <span>NFTs</span></h2>
+                            <p>Windmill Digital marketplace for crypto collectibles and non-fungible tokens. Buy, sell, and discover exclusive digital assets.</p>
+                            <a href="javascript:void(0)" routerLink="/marketplace">Explore</a>
+                            <a href="javascript:void(0)" (click)="openCreate()">Create</a>
+                    </li>
+                    <li>
+                        <img src="assets/images/banner_images.png">
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="nft-trending" *ngIf="collections.length>0">
+            <div class="nft-trending-head">
+                <div class="container">
+                    <h2>Trending collections</h2>
+                    <ul class="top_tabs">
+                        <li [ngClass]="{'active':collectionMenu == ''}" (click)="showItemByCollection('')"><a href="javascript:void(0)">All items</a></li>
+                        <li *ngFor="let item of collections" [ngClass]="{'active':item._id == collectionMenu}" (click)="showItemByCollection(item._id)"><a href="javascript:void(0)">{{item.name}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="nft-trending_body">
+                <div class="container">
+                    <app-itemskeleton *ngIf="loading"></app-itemskeleton>
+                    <div class="row" *ngIf="!loading && collectionItems.length>0">
+                        <div class="col-md-4" *ngFor="let item of collectionItems">
+                              <app-item [item]="item" (itemEvent)="itemEvent($event)"> </app-item>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nft-sell">
+            <div class="nft-sell-head">
+                <div class="container">
+                    <h2>Create and Sell your NFTs</h2>
+                    <p>Create Unique NFTs on Windmill.</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="nft-sell-blocks">
+                        <div class="nft-sell-image">
+                            <img src="assets/images/wallet.png">
+                        </div>
+
+                            <h4>Setup your Wallet</h4>
+                            <p>Once you login the market creates an ETH account for you, get the account details from your profile. The app automatically connects if you are logged in.</p>
+                    </div>
+                </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="nft-sell-blocks">
+                        <div class="nft-sell-image">
+                            <img src="assets/images/collections.png">
+                        </div>
+
+                            <h4>Create your collection</h4>
+                            <p>Click Create and set up your collection. Add social links, a description, profile & banner images, and set a secondary sales fee.</p>
+                    </div>
+                </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="nft-sell-blocks">
+                        <div class="nft-sell-image">
+                            <img src="assets/images/nfts.png">
+                        </div>
+
+                            <h4>Add your NFTs</h4>
+                            <p>Upload your work, add a title and description, and customize your NFTs with properties, stats, and unlockable content.</p>
+                    </div>
+                </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="nft-sell-blocks">
+                        <div class="nft-sell-image">
+                            <img src="assets/images/sale.png">
+                        </div>
+
+                            <h4>List Them for Sale</h4>
+                            <p>Choose between auctions, fixed-price listings, and declining-price listings. You choose how you want to sell your NFTs, and we help you sell them!</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="nft-category">
+            <div class="nft-category-head">
+                <div class="container">
+                    <h2>Browse By Category</h2>
+                    <p>Browse our Marketplace by category.</p>
+                </div>
+            </div>
+            <div class="nft-category-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3" *ngFor="let category of categories">
+                            <div class="item" [routerLink]="['/marketplace']" [queryParams]="{category_id: category._id}">
+                                <div class="nft-category-listing">
+                                    <img [src]="mediaBase + '/images/categories/' + category.category_image">
+                                    <div class="nft-category-listing-overlay"></div>
+                                    <ul class="ntf-category-foot">
+                                        <li>
+                                            <h4>{{category.title}}</h4>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="nft-bottom-block">
+            <p>© 2021 Copyright Windmill Digital a project of Windmill Token. All Rights Reserved</p>
+         </div>
+    </div>
+</div>
